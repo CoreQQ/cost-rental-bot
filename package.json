@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "start": "node --env-file=.env cost-rental-bot.mjs",
+    "check": "node --env-file=.env run-once.mjs",
     "chatid": "node --env-file=.env cost-rental-bot.mjs --get-chat-id",
     "test": "node test.mjs && node core-test.mjs && node filestore-test.mjs"
   },

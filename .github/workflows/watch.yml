@@ -1,0 +1,47 @@
+name: watch
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"   # every 15 min (GitHub Actions may delay this by 10-30 min)
+  workflow_dispatch: {}        # lets you press "Run workflow" manually
+
+permissions:
+  contents: write              # to commit state.json back to the repo
+  actions: write               # for the keepalive step
+
+concurrency:
+  group: watch
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Run one check
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          WANT_BEDROOMS: "2,3"
+          NOTIFY_ON_UNKNOWN: "true"
+          WATCHDOG_AFTER: "2"
+          HEARTBEAT_HOURS: "24"
+        run: node run-once.mjs
+
+      - name: Persist state (only if changed)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add state.json
+          git diff --staged --quiet || (git commit -m "chore: update watch state [skip ci]" && git push)
+
+      - name: Keepalive (avoid 60-day auto-disable of the schedule)
+        uses: gautamkrishnar/keepalive-workflow@v2

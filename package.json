@@ -7,9 +7,11 @@
   "scripts": {
     "start": "node --env-file=.env cost-rental-bot.mjs",
     "chatid": "node --env-file=.env cost-rental-bot.mjs --get-chat-id",
-    "test": "node test.mjs && node smoke.mjs && node vercel-test.mjs"
+    "test": "node test.mjs && node core-test.mjs && node filestore-test.mjs"
   },
-  "engines": { "node": ">=20.6" },
+  "engines": {
+    "node": ">=20.6"
+  },
   "dependencies": {
     "cheerio": "^1.0.0",
     "@supabase/supabase-js": "^2.45.0"

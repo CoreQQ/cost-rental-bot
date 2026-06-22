@@ -1,6 +1,6 @@
-# Standalone-only files — not needed by the Vercel function (api/check.js + parser.mjs).
+# Standalone-only + test files — not needed by the Vercel function.
 cost-rental-bot.mjs
 test.mjs
-smoke.mjs
-vercel-test.mjs
+core-test.mjs
+filestore-test.mjs
 state.json

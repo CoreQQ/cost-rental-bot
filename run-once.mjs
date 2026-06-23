@@ -13,6 +13,9 @@ if (!TOKEN || !CHAT_ID) {
 const want = new Set(
   (process.env.WANT_BEDROOMS ?? "2,3").split(",").map((s) => Number(s.trim())).filter((n) => !Number.isNaN(n))
 );
+const disabledSites = new Set(
+  (process.env.DISABLED_SITES ?? "").split(",").map((s) => s.trim()).filter(Boolean)
+);
 const store = makeFileStore(process.env.STATE_FILE ?? "./state.json");
 const notify = (text) => sendMessage(TOKEN, CHAT_ID, text);
 
@@ -20,6 +23,7 @@ const summary = await runCycle({
   store,
   notify,
   want,
+  disabledSites,
   notifyOnUnknown: (process.env.NOTIFY_ON_UNKNOWN ?? "true") !== "false",
   watchdogAfter: Number(process.env.WATCHDOG_AFTER ?? 2),
   heartbeatHours: Number(process.env.HEARTBEAT_HOURS ?? 24),

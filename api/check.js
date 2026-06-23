@@ -23,6 +23,7 @@ export default async function handler(req, res) {
     WANT_BEDROOMS = "2,3",
     NOTIFY_ON_UNKNOWN = "true",
     WATCHDOG_AFTER = "3",
+    DISABLED_SITES = "",
     HEARTBEAT_HOURS = "24",
   } = process.env;
 
@@ -35,6 +36,7 @@ export default async function handler(req, res) {
     if (!v) return res.status(500).json({ error: `missing env ${k}` });
   }
 
+  const disabledSites = new Set(DISABLED_SITES.split(",").map((x) => x.trim()).filter(Boolean));
   const want = new Set(WANT_BEDROOMS.split(",").map((s) => Number(s.trim())).filter((n) => !Number.isNaN(n)));
   const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, { auth: { persistSession: false } });
 
@@ -74,7 +76,7 @@ export default async function handler(req, res) {
 
   try {
     const summary = await runCycle({
-      store, notify, want,
+      store, notify, want, disabledSites,
       notifyOnUnknown: NOTIFY_ON_UNKNOWN !== "false",
       watchdogAfter: Number(WATCHDOG_AFTER),
       heartbeatHours: Number(HEARTBEAT_HOURS),

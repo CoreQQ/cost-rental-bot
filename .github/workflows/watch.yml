@@ -30,6 +30,7 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           WANT_BEDROOMS: "2,3"
+          DISABLED_SITES: "Tuath"
           NOTIFY_ON_UNKNOWN: "true"
           WATCHDOG_AFTER: "2"
           HEARTBEAT_HOURS: "24"

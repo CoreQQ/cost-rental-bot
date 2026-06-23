@@ -3,7 +3,7 @@
   "meta": {
     "fails": {
       "LDA": 0,
-      "Tuath": 3,
+      "Tuath": 4,
       "Respond": 0
     },
     "watchdogAlerted": {
@@ -11,6 +11,7 @@
       "Respond": false,
       "Tuath": true
     },
-    "lastHeartbeat": "2026-06-23T03:46:11.645Z"
+    "lastHeartbeat": "2026-06-23T03:46:11.645Z",
+    "tgOffset": 620995223
   }
 }

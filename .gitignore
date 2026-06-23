@@ -1,8 +1,11 @@
 node_modules/
 .env
 .env.local
-state.json
-state.test.json
 *.tmp
 .vercel
 .DS_Store
+
+# Local/test state only — the GitHub Actions watch commits ./state.json on purpose,
+# so state.json is intentionally NOT ignored.
+state.test.json
+state.filestore-test.json

@@ -164,3 +164,57 @@ export const SITES = [
     isOpen: (e) => e.linkPos < e.closedListingsPos,
   },
 ];
+
+// ---- Loose text/markdown parser (for the render-proxy fallback) -----------
+// Render proxies (e.g. Jina Reader) return markdown, not HTML, so cheerio finds
+// nothing. This walks the text by detail-link, mirroring extractEntries' logic.
+export function extractEntriesFromText(text, baseUrl, detailPattern) {
+  const lines = (text || "").split(/\r?\n/);
+  const esc = detailPattern.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const reUrl = new RegExp(`https?:\\/\\/[^\\s)"'<>]*${esc}[^\\s)"'<>]*`);
+  const baseKey = baseUrl.replace(/\/+$/, "");
+
+  let closedListingsPos = Infinity;
+  for (let i = 0; i < lines.length; i++) {
+    if (/closed listings/i.test(lines[i])) { closedListingsPos = i; break; }
+  }
+
+  const hits = [];
+  const seen = new Set();
+  for (let i = 0; i < lines.length; i++) {
+    const m = lines[i].match(reUrl);
+    if (!m) continue;
+    const url = m[0].replace(/[)\].,"'>]+$/, "");
+    const key = url.replace(/\/+$/, "");
+    if (key === baseKey || seen.has(key)) continue;
+    seen.add(key);
+    hits.push({ line: i, url });
+  }
+
+  const isHeading = (l) => /^#{2,4}\s+/.test(l.trim());
+  const entries = [];
+  for (let k = 0; k < hits.length; k++) {
+    const hit = hits[k];
+    const start = k === 0 ? Math.max(0, hit.line - 12) : hits[k - 1].line + 1;
+    const win = lines.slice(start, hit.line + 1);
+    const winText = win.join("\n");
+    const headings = win.filter(isHeading);
+    let title = "Без названия";
+    let location = "";
+    if (headings.length) {
+      const h = headings[headings.length - 1];
+      title = h.trim().replace(/^#{2,4}\s+/, "").trim();
+      for (let j = win.lastIndexOf(h) + 1; j < win.length; j++) {
+        const l = win[j].trim();
+        if (!l || isHeading(win[j]) || /^!\[/.test(l) || /\]\(/.test(l) || /^https?:/.test(l)) continue;
+        location = l.replace(/[*_`]+/g, "").trim();
+        break;
+      }
+    }
+    entries.push({
+      title, location, url: hit.url, text: winText, linkPos: hit.line,
+      closedListingsPos, cardBeds: [...bedroomsFromText(winText)],
+    });
+  }
+  return entries;
+}

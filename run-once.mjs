@@ -2,6 +2,7 @@
 import { runCycle } from "./lib/core.mjs";
 import { makeFileStore } from "./lib/filestore.mjs";
 import { sendMessage } from "./lib/telegram.mjs";
+import { handleCommands } from "./lib/commands.mjs";
 
 const TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
@@ -33,3 +34,11 @@ console.log(
   JSON.stringify(summary.sites),
   `| notified:${summary.notified.length} watchdog:${summary.watchdog.length} heartbeat:${summary.heartbeat}`
 );
+
+// Answer any on-demand commands (e.g. /all) sent to the chat.
+try {
+  const cmd = await handleCommands({ store, token: TOKEN, chatId: CHAT_ID, disabledSites });
+  if (cmd.handled) console.log("answered /all command");
+} catch (e) {
+  console.log("command handling error:", e.message);
+}

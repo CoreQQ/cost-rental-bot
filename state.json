@@ -1,0 +1,15 @@
+{
+  "schemes": {},
+  "meta": {
+    "fails": {
+      "LDA": 0,
+      "Tuath": 1,
+      "Respond": 0
+    },
+    "watchdogAlerted": {
+      "LDA": false,
+      "Respond": false
+    },
+    "lastHeartbeat": "2026-06-23T03:46:11.645Z"
+  }
+}

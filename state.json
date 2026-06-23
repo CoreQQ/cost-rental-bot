@@ -3,12 +3,13 @@
   "meta": {
     "fails": {
       "LDA": 0,
-      "Tuath": 1,
+      "Tuath": 2,
       "Respond": 0
     },
     "watchdogAlerted": {
       "LDA": false,
-      "Respond": false
+      "Respond": false,
+      "Tuath": true
     },
     "lastHeartbeat": "2026-06-23T03:46:11.645Z"
   }

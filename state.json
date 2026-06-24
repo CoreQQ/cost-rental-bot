@@ -11,7 +11,7 @@
       ],
       "notified_open": true,
       "first_seen": "2026-06-24T11:17:34.936Z",
-      "last_seen": "2026-06-24T21:45:55.211Z"
+      "last_seen": "2026-06-24T23:05:05.599Z"
     },
     "https://lda.ie/affordable-homes/lda-cost-rental/the-quarter-citywest-dublin-24-7": {
       "url": "https://lda.ie/affordable-homes/lda-cost-rental/the-quarter-citywest-dublin-24-7",
@@ -24,7 +24,7 @@
       ],
       "notified_open": true,
       "first_seen": "2026-06-24T11:17:34.936Z",
-      "last_seen": "2026-06-24T21:45:55.211Z"
+      "last_seen": "2026-06-24T23:05:05.599Z"
     },
     "https://www.respond.ie/properties/the-place-seven-mills/": {
       "url": "https://www.respond.ie/properties/the-place-seven-mills/",
@@ -39,13 +39,13 @@
       ],
       "notified_open": true,
       "first_seen": "2026-06-24T11:17:34.936Z",
-      "last_seen": "2026-06-24T21:45:55.211Z"
+      "last_seen": "2026-06-24T23:05:05.599Z"
     }
   },
   "meta": {
     "fails": {
       "LDA": 0,
-      "Tuath": 18,
+      "Tuath": 19,
       "Respond": 0
     },
     "watchdogAlerted": {

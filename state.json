@@ -11,7 +11,7 @@
       ],
       "notified_open": true,
       "first_seen": "2026-06-24T11:17:34.936Z",
-      "last_seen": "2026-06-27T18:18:57.265Z"
+      "last_seen": "2026-06-27T19:53:17.182Z"
     },
     "https://lda.ie/affordable-homes/lda-cost-rental/the-quarter-citywest-dublin-24-7": {
       "url": "https://lda.ie/affordable-homes/lda-cost-rental/the-quarter-citywest-dublin-24-7",
@@ -24,7 +24,7 @@
       ],
       "notified_open": true,
       "first_seen": "2026-06-24T11:17:34.936Z",
-      "last_seen": "2026-06-27T18:18:57.265Z"
+      "last_seen": "2026-06-27T19:53:17.182Z"
     },
     "https://www.respond.ie/properties/the-place-seven-mills/": {
       "url": "https://www.respond.ie/properties/the-place-seven-mills/",
@@ -39,7 +39,7 @@
       ],
       "notified_open": true,
       "first_seen": "2026-06-24T11:17:34.936Z",
-      "last_seen": "2026-06-27T18:18:57.265Z"
+      "last_seen": "2026-06-27T19:53:17.182Z"
     },
     "https://www.respond.ie/properties/dun-an-ri-coosan-athlone/": {
       "url": "https://www.respond.ie/properties/dun-an-ri-coosan-athlone/",
@@ -54,13 +54,13 @@
       ],
       "notified_open": true,
       "first_seen": "2026-06-26T11:23:45.877Z",
-      "last_seen": "2026-06-27T18:18:57.265Z"
+      "last_seen": "2026-06-27T19:53:17.182Z"
     }
   },
   "meta": {
     "fails": {
       "LDA": 0,
-      "Tuath": 48,
+      "Tuath": 49,
       "Respond": 0
     },
     "watchdogAlerted": {

@@ -4,27 +4,27 @@
       "url": "https://lda.ie/affordable-homes/lda-cost-rental/barnwell-point-hansfield-dublin-15-8",
       "site": "LDA",
       "title": "Barnwell Point, Hansfield, Dublin 15",
-      "status": "open",
+      "status": "closed",
       "beds": [
         1,
         2
       ],
-      "notified_open": true,
+      "notified_open": false,
       "first_seen": "2026-06-24T11:17:34.936Z",
-      "last_seen": "2026-06-27T19:53:17.182Z"
+      "last_seen": "2026-06-27T21:05:22.992Z"
     },
     "https://lda.ie/affordable-homes/lda-cost-rental/the-quarter-citywest-dublin-24-7": {
       "url": "https://lda.ie/affordable-homes/lda-cost-rental/the-quarter-citywest-dublin-24-7",
       "site": "LDA",
       "title": "The Quarter, Citywest, Dublin 24",
-      "status": "open",
+      "status": "closed",
       "beds": [
         1,
         2
       ],
-      "notified_open": true,
+      "notified_open": false,
       "first_seen": "2026-06-24T11:17:34.936Z",
-      "last_seen": "2026-06-27T19:53:17.182Z"
+      "last_seen": "2026-06-27T21:05:22.992Z"
     },
     "https://www.respond.ie/properties/the-place-seven-mills/": {
       "url": "https://www.respond.ie/properties/the-place-seven-mills/",
@@ -39,7 +39,7 @@
       ],
       "notified_open": true,
       "first_seen": "2026-06-24T11:17:34.936Z",
-      "last_seen": "2026-06-27T19:53:17.182Z"
+      "last_seen": "2026-06-27T21:05:17.528Z"
     },
     "https://www.respond.ie/properties/dun-an-ri-coosan-athlone/": {
       "url": "https://www.respond.ie/properties/dun-an-ri-coosan-athlone/",
@@ -54,13 +54,13 @@
       ],
       "notified_open": true,
       "first_seen": "2026-06-26T11:23:45.877Z",
-      "last_seen": "2026-06-27T19:53:17.182Z"
+      "last_seen": "2026-06-27T21:05:17.528Z"
     }
   },
   "meta": {
     "fails": {
-      "LDA": 0,
-      "Tuath": 49,
+      "LDA": 1,
+      "Tuath": 50,
       "Respond": 0
     },
     "watchdogAlerted": {

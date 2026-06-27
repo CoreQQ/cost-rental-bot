@@ -39,7 +39,7 @@
       ],
       "notified_open": true,
       "first_seen": "2026-06-24T11:17:34.936Z",
-      "last_seen": "2026-06-27T22:16:13.234Z"
+      "last_seen": "2026-06-27T23:34:19.299Z"
     },
     "https://www.respond.ie/properties/dun-an-ri-coosan-athlone/": {
       "url": "https://www.respond.ie/properties/dun-an-ri-coosan-athlone/",
@@ -54,13 +54,13 @@
       ],
       "notified_open": true,
       "first_seen": "2026-06-26T11:23:45.877Z",
-      "last_seen": "2026-06-27T22:16:13.234Z"
+      "last_seen": "2026-06-27T23:34:19.299Z"
     }
   },
   "meta": {
     "fails": {
-      "LDA": 2,
-      "Tuath": 51,
+      "LDA": 3,
+      "Tuath": 52,
       "Respond": 0
     },
     "watchdogAlerted": {

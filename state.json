@@ -1,4 +1,43 @@
 {
-  "schemes": {},
-  "meta": {}
+  "schemes": {
+    "https://affordablehomes.ie/rent/carrigmorewoods/": {
+      "url": "https://affordablehomes.ie/rent/carrigmorewoods/",
+      "title": "Carrigmore Woods",
+      "location": "Citywest, Co. Dublin",
+      "status": "open",
+      "beds": [
+        2
+      ],
+      "applyUrl": "https://tuathhousing.ie/cost-rental/",
+      "deadline": "30 June 2026 at 14:00",
+      "provider": "Tuath Housing",
+      "notified_open": true,
+      "first_seen": "2026-06-28T23:05:59.010Z",
+      "last_seen": "2026-06-28T23:05:59.010Z"
+    },
+    "https://affordablehomes.ie/rent/kilcarberygrange2/": {
+      "url": "https://affordablehomes.ie/rent/kilcarberygrange2/",
+      "title": "Kilcarbery Grange",
+      "location": "Clondalkin, Dublin 22, Co. Dublin",
+      "status": "open",
+      "beds": [
+        2
+      ],
+      "applyUrl": "https://tuathhousing.ie/cost-rental/",
+      "deadline": "30 June 2026 at 14:00",
+      "provider": "Tuath Housing",
+      "notified_open": true,
+      "first_seen": "2026-06-28T23:05:59.010Z",
+      "last_seen": "2026-06-28T23:05:59.010Z"
+    }
+  },
+  "meta": {
+    "fails": {
+      "affordablehomes.ie": 0
+    },
+    "watchdogAlerted": {
+      "affordablehomes.ie": false
+    },
+    "lastHeartbeat": "2026-06-28T23:05:59.010Z"
+  }
 }

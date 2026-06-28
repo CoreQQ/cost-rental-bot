@@ -29,8 +29,8 @@ export function bedroomsFromText(text) {
   for (const m of t.matchAll(/\b(one|two|three|four|five)\s*-?\s*bed(?:room)?s?\b/g)) {
     if (m[1] in WORD2NUM) found.add(WORD2NUM[m[1]]);
   }
-  // lists like "1 2 and 3 bedroom"
-  const list = t.match(/((?:\d+[\s,]+){1,}(?:and\s+)?\d+)\s*-?\s*bed(?:room)?/);
+  // lists like "1, 2 and 3 bedroom", "2 & 3 bed", "2/3 bedroom"
+  const list = t.match(/((?:\d+[\s,&/]+){1,}(?:and\s+)?\d+)\s*-?\s*bed(?:room)?/);
   if (list) for (const d of list[1].matchAll(/\d+/g)) found.add(Number(d[0]));
   found.delete(NaN);
   return found;
@@ -217,4 +217,71 @@ export function extractEntriesFromText(text, baseUrl, detailPattern) {
     });
   }
   return entries;
+}
+
+// ---- affordablehomes.ie parsers ------------------------------------------
+// The bot fetches raw HTML; convert it to markdown-ish text (links as
+// [text](href), block tags on their own lines) so ONE parser works on both the
+// raw HTML and on render-proxy markdown.
+export function htmlToText(html) {
+  const $ = load(html);
+  $("script,style,noscript,svg,head").remove();
+  $("a").each((_, el) => {
+    const $el = $(el);
+    const href = $el.attr("href") || "";
+    $el.replaceWith(` [${$el.text().trim()}](${href}) `);
+  });
+  $("h1,h2,h3,h4,h5,h6,p,div,li,tr,br,section,article").each((_, el) => {
+    $(el).prepend("\n");
+    $(el).append("\n");
+  });
+  return $("body").text().replace(/[ \t]+/g, " ").replace(/ *\n */g, "\n").replace(/\n{2,}/g, "\n").trim();
+}
+
+const AH_BASE = "https://affordablehomes.ie";
+const AH_LINK = /\[([^\]]*)\]\(\s*(?:https?:\/\/affordablehomes\.ie)?\/rent\/([a-z0-9-]+)\/?\s*\)/i;
+
+// Parse the /rent/ listing into schemes: { title, url, slug, status, open, location }.
+export function parseAffordableList(text) {
+  const lines = (text || "").split(/\r?\n/);
+  const hits = [];
+  for (let i = 0; i < lines.length; i++) {
+    const m = lines[i].match(AH_LINK);
+    if (!m) continue;
+    const slug = m[2].toLowerCase();
+    if (["map", "calendar", "list"].includes(slug)) continue;
+    hits.push({ line: i, name: (m[1] || "").trim(), slug });
+  }
+  const order = [];
+  const firstLine = {};
+  for (const h of hits) if (!(h.slug in firstLine)) { firstLine[h.slug] = h.line; order.push(h.slug); }
+
+  const entries = [];
+  for (let k = 0; k < order.length; k++) {
+    const slug = order[k];
+    const start = firstLine[slug];
+    const end = k + 1 < order.length ? firstLine[order[k + 1]] : lines.length;
+    const block = lines.slice(start, end).join("\n");
+    const names = hits.filter((h) => h.slug === slug).map((h) => h.name);
+    const title = names.find((n) => n && !/read more/i.test(n)) || names[0] || slug;
+    const status = /Applications Open/i.test(block) ? "open"
+      : /Coming Soon/i.test(block) ? "soon"
+      : /Applications Closed/i.test(block) ? "closed" : "unknown";
+    const locM = block.match(/#{0,6}\s*Location\s*\n+\s*([^\n]+)/i);
+    const location = locM ? locM[1].replace(/[*_`#>]+/g, "").trim() : "";
+    entries.push({ title, url: `${AH_BASE}/rent/${slug}/`, slug, status, open: status === "open", location });
+  }
+  return entries;
+}
+
+// Parse a detail page: { beds:[], applyUrl, deadline, provider }.
+export function parseAffordableDetail(text) {
+  const beds = [...bedroomsFromText(text)].filter((n) => n > 0);
+  const applyM = text.match(/\[\s*Apply Now\s*\]\((https?:\/\/[^\s)]+)\)/i);
+  const applyUrl = applyM ? applyM[1] : null;
+  const deadM = text.match(/Applications?\s+Close[ds]?:?\s*\n*\s*([0-9][^\n]*?(?:\d{4}|am|pm|\d{1,2}:\d{2})[^\n]*)/i);
+  const deadline = deadM ? deadM[1].replace(/\s{2,}/g, " ").trim() : "";
+  const ahbM = text.match(/Approved Housing Body\s*\n+\s*([^\n]+)/i);
+  const provider = ahbM ? ahbM[1].replace(/[*_`#>]+/g, "").trim() : "";
+  return { beds, applyUrl, deadline, provider };
 }

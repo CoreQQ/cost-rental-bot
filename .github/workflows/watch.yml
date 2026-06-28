@@ -2,11 +2,11 @@ name: watch
 
 on:
   schedule:
-    - cron: "*/15 * * * *"   # every 15 min (GitHub Actions may delay this by 10-30 min)
-  workflow_dispatch: {}        # lets you press "Run workflow" manually
+    - cron: "*/15 * * * *"   # every 15 min (GitHub may delay scheduled runs)
+  workflow_dispatch: {}
 
 permissions:
-  contents: write              # to commit state.json back to the repo
+  contents: write              # to commit state.json back
 
 concurrency:
   group: watch
@@ -17,26 +17,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
-
       - run: npm ci
-
       - name: Run one check
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           WANT_BEDROOMS: "2,3"
-          DISABLED_SITES: ""
-          JINA_API_KEY: ${{ secrets.JINA_API_KEY }}
+          LIST_PAGES: "2"
           NOTIFY_ON_UNKNOWN: "true"
           WATCHDOG_AFTER: "2"
           HEARTBEAT_HOURS: "24"
+          JINA_API_KEY: ${{ secrets.JINA_API_KEY }}
+          ADMIN_USER_ID: ${{ secrets.ADMIN_USER_ID }}
         run: node run-once.mjs
-
       - name: Persist state (only if changed)
         run: |
           git config user.name "github-actions[bot]"

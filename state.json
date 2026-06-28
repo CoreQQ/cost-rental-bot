@@ -4,27 +4,27 @@
       "url": "https://lda.ie/affordable-homes/lda-cost-rental/barnwell-point-hansfield-dublin-15-8",
       "site": "LDA",
       "title": "Barnwell Point, Hansfield, Dublin 15",
-      "status": "closed",
+      "status": "open",
       "beds": [
         1,
         2
       ],
-      "notified_open": false,
+      "notified_open": true,
       "first_seen": "2026-06-24T11:17:34.936Z",
-      "last_seen": "2026-06-27T21:05:22.992Z"
+      "last_seen": "2026-06-28T01:52:46.751Z"
     },
     "https://lda.ie/affordable-homes/lda-cost-rental/the-quarter-citywest-dublin-24-7": {
       "url": "https://lda.ie/affordable-homes/lda-cost-rental/the-quarter-citywest-dublin-24-7",
       "site": "LDA",
       "title": "The Quarter, Citywest, Dublin 24",
-      "status": "closed",
+      "status": "open",
       "beds": [
         1,
         2
       ],
-      "notified_open": false,
+      "notified_open": true,
       "first_seen": "2026-06-24T11:17:34.936Z",
-      "last_seen": "2026-06-27T21:05:22.992Z"
+      "last_seen": "2026-06-28T01:52:46.751Z"
     },
     "https://www.respond.ie/properties/the-place-seven-mills/": {
       "url": "https://www.respond.ie/properties/the-place-seven-mills/",
@@ -39,7 +39,7 @@
       ],
       "notified_open": true,
       "first_seen": "2026-06-24T11:17:34.936Z",
-      "last_seen": "2026-06-27T23:34:19.299Z"
+      "last_seen": "2026-06-28T01:52:46.751Z"
     },
     "https://www.respond.ie/properties/dun-an-ri-coosan-athlone/": {
       "url": "https://www.respond.ie/properties/dun-an-ri-coosan-athlone/",
@@ -54,17 +54,17 @@
       ],
       "notified_open": true,
       "first_seen": "2026-06-26T11:23:45.877Z",
-      "last_seen": "2026-06-27T23:34:19.299Z"
+      "last_seen": "2026-06-28T01:52:46.751Z"
     }
   },
   "meta": {
     "fails": {
-      "LDA": 3,
-      "Tuath": 52,
+      "LDA": 0,
+      "Tuath": 53,
       "Respond": 0
     },
     "watchdogAlerted": {
-      "LDA": true,
+      "LDA": false,
       "Respond": false,
       "Tuath": true
     },

@@ -1,7 +1,7 @@
 // run-once.mjs — single check cycle, then exit. Used by GitHub Actions (and any cron).
 import { runCycle } from "./lib/core.mjs";
 import { makeFileStore } from "./lib/filestore.mjs";
-import { sendMessage } from "./lib/telegram.mjs";
+import { sendToGroup } from "./lib/telegram.mjs";
 import { handleCommands } from "./lib/commands.mjs";
 
 const TOKEN = process.env.TELEGRAM_BOT_TOKEN;
@@ -15,7 +15,7 @@ const want = new Set(
   (process.env.WANT_BEDROOMS ?? "2,3").split(",").map((s) => Number(s.trim())).filter((n) => !Number.isNaN(n))
 );
 const store = makeFileStore(process.env.STATE_FILE ?? "./state.json");
-const notify = (text, buttons) => sendMessage(TOKEN, CHAT_ID, text, buttons);
+const notify = (text, buttons) => sendToGroup(TOKEN, store, CHAT_ID, text, buttons);
 
 const summary = await runCycle({
   store,

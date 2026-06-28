@@ -61,6 +61,7 @@ let sends = [];
 let updatesQueue = [];
 globalThis.fetch = async (url, opts) => {
   url = String(url);
+  if (url.includes("/deleteWebhook")) return { ok: true, json: async () => ({ ok: true }) };
   if (url.includes("/sendMessage")) { sends.push(JSON.parse(opts.body)); return { ok: true, json: async () => ({ ok: true }) }; }
   if (url.includes("/getUpdates")) {
     const m = url.match(/offset=(\d+)/); const off = m ? Number(m[1]) : 0;

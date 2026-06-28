@@ -13,7 +13,7 @@
       "provider": "Tuath Housing",
       "notified_open": true,
       "first_seen": "2026-06-28T23:05:59.010Z",
-      "last_seen": "2026-06-28T23:23:07.246Z"
+      "last_seen": "2026-06-28T23:50:08.767Z"
     },
     "https://affordablehomes.ie/rent/kilcarberygrange2/": {
       "url": "https://affordablehomes.ie/rent/kilcarberygrange2/",
@@ -28,7 +28,7 @@
       "provider": "Tuath Housing",
       "notified_open": true,
       "first_seen": "2026-06-28T23:05:59.010Z",
-      "last_seen": "2026-06-28T23:23:07.246Z"
+      "last_seen": "2026-06-28T23:50:08.767Z"
     }
   },
   "meta": {
@@ -39,7 +39,7 @@
       "affordablehomes.ie": false
     },
     "lastHeartbeat": "2026-06-28T23:05:59.010Z",
-    "tgOffset": 620995245,
+    "tgOffset": 620995247,
     "groupChatId": -1004438936269
   }
 }

@@ -3,7 +3,7 @@
 // Cron (daily on Hobby) and/or an external scheduler hitting /api/scan?key=SECRET.
 import { runCycle } from "../lib/core.mjs";
 import { sendToGroup } from "../lib/telegram.mjs";
-import { makeKvStore } from "../lib/kvstore.mjs";
+import { makeKvStore, resolveKvEnv } from "../lib/kvstore.mjs";
 
 export default async function handler(req, res) {
   // Auth: Vercel Cron sends "Authorization: Bearer <CRON_SECRET>"; an external
@@ -13,6 +13,13 @@ export default async function handler(req, res) {
   const key = (req.query && req.query.key) || "";
   if (secret && auth !== `Bearer ${secret}` && key !== secret) {
     return res.status(401).json({ ok: false, error: "unauthorized" });
+  }
+
+  // Diagnostic: list KV-related env var NAMES (no values) to debug Upstash wiring.
+  if (req.query && req.query.diag === "env") {
+    const names = Object.keys(process.env).filter((k) => /UPSTASH|KV_|REDIS|STORAGE/i.test(k)).sort();
+    const { url, token } = resolveKvEnv();
+    return res.status(200).json({ ok: true, kvEnvNames: names, resolved: { url: !!url, token: !!token } });
   }
 
   const TOKEN = process.env.TELEGRAM_BOT_TOKEN;

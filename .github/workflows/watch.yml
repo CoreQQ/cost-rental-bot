@@ -1,8 +1,11 @@
 name: watch
 
 on:
-  schedule:
-    - cron: "*/15 * * * *"   # every 15 min (GitHub may delay scheduled runs)
+  # DISABLED: the bot now runs on Vercel (webhook + /api/scan). This GitHub
+  # scanner is kept only as a manual backup. Re-enable the schedule below if
+  # you ever want GitHub to take over again.
+  # schedule:
+  #   - cron: "*/15 * * * *"
   workflow_dispatch: {}
 
 permissions:
